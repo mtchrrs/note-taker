@@ -38,7 +38,7 @@
 
   Simply click on the ádd notes'button, type out your notes, and save!
   
-  Application URL: https://dashboard.heroku.com/apps/app-001-note-taker
+  Application URL: https://app-001-note-taker.herokuapp.com/
 
 
   ## Contributions
