@@ -2,22 +2,25 @@ const express = require('express');
 const fs = require('fs');
 const uuid = require('uuid');
 
+const path = require('path');
+const DATABASE = require('./Develop/db/db.json');
+
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-app.use(express.static("./Develop/public"));
+app.use(express.static('./Develop/public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "./Develop/public/index.html"))
+    res.sendFile(path.join(__dirname,'./Develop/public/index.html'))
 });
 
 app.get("/notes", (req, res) => {
-    res.sendFile(path.join(__dirname, "./Develop/public/notes.html"));
+    res.sendFile(path.join(__dirname, './Develop/public/notes.html'));
 });
 
-app.get("/api/notes", (req, res) => {
+app.get("/api/notes", async function (req, res){
     fs.readFile("./Develop/db/db.json", (err, data) => {
         if (err) {
             console.log(err);
@@ -27,7 +30,7 @@ app.get("/api/notes", (req, res) => {
     })
 })
 
-app.post("/api/notes", (req, res) => {
+app.post("/api/notes", async function (req, res){
     console.log(req.method);
 
     const {title, text} = req.body;
@@ -65,7 +68,7 @@ app.post("/api/notes", (req, res) => {
     console.log("Posting to api/notes")
 });
 
-app.delete("/api/notes/:id", (req, res) => {
+app.delete("/api/notes/:id", async function (req, res){
     let notes = JSON.parse(fs.readFileSync("./Develop/db/db.json", "utf8"));
     let noteId = (req.params.id).toString();
 
