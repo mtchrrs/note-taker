@@ -2,8 +2,6 @@ const express = require('express');
 const fs = require('fs');
 const uuid = require('uuid');
 
-const path = require('path');
-const DATABASE = require('./Develop/db/db.json');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -68,7 +66,7 @@ app.post("/api/notes", async function (req, res){
     console.log("Posting to api/notes")
 });
 
-app.delete("/api/notes/:id", async function (req, res){
+app.delete("/api/notes/:id", (req, res) => {
     let notes = JSON.parse(fs.readFileSync("./Develop/db/db.json", "utf8"));
     let noteId = (req.params.id).toString();
 
