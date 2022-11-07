@@ -12,11 +12,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname,'./Develop/public/index.html'))
+    res.sendFile(path.join(__dirname,'./index.html'))
 });
 
 app.get("/notes", (req, res) => {
-    res.sendFile(path.join(__dirname, './Develop/public/notes.html'));
+    res.sendFile(path.join(__dirname, './notes.html'));
 });
 
 app.get("/api/notes", async function (req, res){
